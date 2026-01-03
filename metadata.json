@@ -1,0 +1,8 @@
+{
+  "name": "TechNova - Computer Store",
+  "description": "A modern and clean e-commerce platform for computers and technology, featuring an AI-powered shopping assistant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
