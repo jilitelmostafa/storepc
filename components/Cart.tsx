@@ -17,11 +17,11 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onRemove, onUpdateQ
 
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose}></div>
       <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col animate-slide-in-left">
-        <div className="p-6 border-b flex justify-between items-center bg-gray-50 shrink-0">
-          <h2 className="text-xl font-black text-gray-900">سلة التسوق</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-900 transition-colors">
+        <div className="p-6 border-b flex justify-between items-center bg-slate-50 shrink-0">
+          <h2 className="text-xl font-black text-slate-800">سلة التسوق</h2>
+          <button onClick={onClose} className="text-slate-400 hover:text-sky-600 transition-colors">
             <i className="fas fa-times text-xl"></i>
           </button>
         </div>
@@ -29,49 +29,49 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onRemove, onUpdateQ
         <div className="flex-grow overflow-y-auto p-6 space-y-6">
           {items.length === 0 ? (
             <div className="text-center py-20">
-              <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-shopping-basket text-3xl text-gray-300"></i>
+              <div className="bg-sky-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-shopping-basket text-3xl text-sky-200"></i>
               </div>
-              <p className="text-gray-500 font-medium">السلة فارغة حالياً</p>
+              <p className="text-slate-400 font-medium">السلة فارغة حالياً</p>
               <button 
                 onClick={onClose}
-                className="mt-4 text-indigo-600 font-bold text-sm hover:underline"
+                className="mt-4 text-sky-600 font-bold text-sm hover:text-sky-700 underline underline-offset-4"
               >
-                ابدأ التسوق الآن
+                ابدأ رحلة التسوق
               </button>
             </div>
           ) : (
             items.map(item => (
-              <div key={item.id} className="flex gap-4 group">
-                <div className="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden shrink-0">
+              <div key={item.id} className="flex gap-4 group animate-fade-in">
+                <div className="w-20 h-20 bg-sky-50 rounded-xl overflow-hidden shrink-0 border border-sky-100">
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-grow flex flex-col justify-between py-1">
                   <div>
                     <div className="flex justify-between items-start">
-                      <h4 className="font-bold text-gray-900 text-sm">{item.name}</h4>
+                      <h4 className="font-bold text-slate-800 text-sm leading-tight">{item.name}</h4>
                       <button 
                         onClick={() => onRemove(item.id)}
-                        className="text-gray-300 hover:text-red-500 transition-colors"
+                        className="text-slate-300 hover:text-red-500 transition-colors p-1"
                       >
                         <i className="fas fa-trash-alt text-xs"></i>
                       </button>
                     </div>
-                    <p className="text-indigo-600 font-black text-sm mt-1">{item.price} ر.س</p>
+                    <p className="text-sky-600 font-black text-sm mt-1">{item.price.toLocaleString()} ر.س</p>
                   </div>
                   
                   <div className="flex items-center gap-4 mt-2">
-                    <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden h-8 bg-gray-50">
+                    <div className="flex items-center border border-sky-100 rounded-lg overflow-hidden h-8 bg-sky-50/50">
                       <button 
                         onClick={() => onUpdateQuantity(item.id, -1)}
-                        className="px-2 hover:bg-gray-200 transition-colors"
+                        className="px-2 hover:bg-sky-100 text-sky-600 transition-colors"
                       >
                         <i className="fas fa-minus text-[10px]"></i>
                       </button>
-                      <span className="px-3 text-xs font-bold text-gray-700 min-w-[30px] text-center">{item.quantity}</span>
+                      <span className="px-3 text-xs font-bold text-slate-700 min-w-[30px] text-center">{item.quantity}</span>
                       <button 
                         onClick={() => onUpdateQuantity(item.id, 1)}
-                        className="px-2 hover:bg-gray-200 transition-colors"
+                        className="px-2 hover:bg-sky-100 text-sky-600 transition-colors"
                       >
                         <i className="fas fa-plus text-[10px]"></i>
                       </button>
@@ -83,26 +83,27 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, onRemove, onUpdateQ
           )}
         </div>
 
-        <div className="p-6 bg-gray-50 border-t shrink-0">
-          <div className="space-y-2 mb-6">
-            <div className="flex justify-between text-sm text-gray-500">
+        <div className="p-6 bg-slate-50 border-t shrink-0">
+          <div className="space-y-3 mb-6">
+            <div className="flex justify-between text-sm text-slate-500">
               <span>المجموع الفرعي:</span>
-              <span>{total.toLocaleString()} ر.س</span>
+              <span className="font-semibold text-slate-800">{total.toLocaleString()} ر.س</span>
             </div>
-            <div className="flex justify-between text-sm text-gray-500">
-              <span>الشحن (تقديري):</span>
-              <span className="text-green-600">مجاني</span>
+            <div className="flex justify-between text-sm text-slate-500">
+              <span>الشحن السريع:</span>
+              <span className="text-sky-600 font-bold">مجاني</span>
             </div>
-            <div className="flex justify-between text-lg font-black text-gray-900 pt-2 border-t border-gray-200">
+            <div className="flex justify-between text-xl font-black text-slate-900 pt-3 border-t border-sky-100">
               <span>الإجمالي:</span>
-              <span>{total.toLocaleString()} ر.س</span>
+              <span className="text-sky-600">{total.toLocaleString()} ر.س</span>
             </div>
           </div>
 
           <button 
             disabled={items.length === 0}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-indigo-200 active:scale-[0.98]"
+            className="w-full bg-sky-500 hover:bg-sky-600 disabled:bg-slate-300 text-white font-bold py-4 rounded-2xl transition-all shadow-xl shadow-sky-100 active:scale-[0.98] flex items-center justify-center gap-3"
           >
+            <i className="fas fa-check-circle"></i>
             إتمام عملية الشراء
           </button>
         </div>

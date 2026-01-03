@@ -39,16 +39,16 @@ const AIChat: React.FC<AIChatProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose}></div>
       <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col animate-slide-in-left">
-        <div className="p-6 bg-indigo-600 text-white flex justify-between items-center shrink-0">
+        <div className="p-6 bg-sky-600 text-white flex justify-between items-center shrink-0">
           <div className="flex items-center gap-3">
             <div className="bg-white/20 p-2 rounded-lg">
               <i className="fas fa-robot text-xl"></i>
             </div>
             <div>
               <h2 className="font-bold">المساعد الذكي</h2>
-              <p className="text-[10px] text-indigo-100">مدعوم بتقنية Gemini AI</p>
+              <p className="text-[10px] text-sky-100 font-medium">مدعوم بتقنية Gemini AI</p>
             </div>
           </div>
           <button onClick={onClose} className="hover:rotate-90 transition-transform p-1">
@@ -56,13 +56,13 @@ const AIChat: React.FC<AIChatProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        <div ref={scrollRef} className="flex-grow overflow-y-auto p-6 space-y-4 bg-gray-50">
+        <div ref={scrollRef} className="flex-grow overflow-y-auto p-6 space-y-4 bg-sky-50/30">
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-start' : 'justify-end'}`}>
               <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm ${
                 msg.role === 'user' 
-                ? 'bg-white border border-gray-100 text-gray-800' 
-                : 'bg-indigo-600 text-white'
+                ? 'bg-white border border-sky-100 text-slate-800' 
+                : 'bg-sky-600 text-white'
               }`}>
                 {msg.text}
               </div>
@@ -70,7 +70,7 @@ const AIChat: React.FC<AIChatProps> = ({ isOpen, onClose }) => {
           ))}
           {isLoading && (
             <div className="flex justify-end">
-              <div className="bg-indigo-100 text-indigo-600 p-4 rounded-2xl text-xs animate-pulse">
+              <div className="bg-sky-100 text-sky-600 px-4 py-3 rounded-2xl text-xs animate-pulse font-bold">
                 جاري التفكير...
               </div>
             </div>
@@ -84,20 +84,17 @@ const AIChat: React.FC<AIChatProps> = ({ isOpen, onClose }) => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="ابحث عن: لابتوب للألعاب، جهاز للدراسة..."
-              className="flex-grow bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+              placeholder="مثال: لابتوب للألعاب، جهاز للمونتاج..."
+              className="flex-grow bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all"
             />
             <button 
               onClick={handleSend}
               disabled={isLoading}
-              className="bg-indigo-600 text-white w-12 h-12 rounded-xl flex items-center justify-center hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100"
+              className="bg-sky-600 text-white w-12 h-12 rounded-xl flex items-center justify-center hover:bg-sky-700 disabled:opacity-50 transition-all shadow-lg shadow-sky-100"
             >
               <i className="fas fa-paper-plane-rtl"></i>
             </button>
           </div>
-          <p className="text-[10px] text-gray-400 text-center mt-3">
-            الذكاء الاصطناعي قد يخطئ، تأكد من المواصفات الفنية دائماً.
-          </p>
         </div>
       </div>
     </div>
